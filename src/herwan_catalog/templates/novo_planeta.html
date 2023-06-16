@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>Cadastrar Novo Planeta</title>
+    <style>
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .caixa-preta {
+            border: 2px solid black;
+            padding: 0px;
+        }
+
+        hr.new5 {
+            border: 1px solid black;
+          }
+    </style>
+</head>
+<body>
+    <h1>Cadastrar Novo Planeta</h1>
+    <form method="post" action="{% url 'salvar_planeta' %}">
+        {% csrf_token %}
+        <div class="caixa-preta">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite o nome do planeta" required>
+            <label for="porcentagem_agua">Porcentagem de Água:</label>
+            <input type="text" id="porcentagem_agua" name="porcentagem_agua" placeholder="Digite a porcentagem de água" required>
+            <hr class="new5">
+            <label for="elemento">Nome do Elemento:</label>
+            <input type="text" id="elemento" placeholder="Digite o nome do elemento">
+            <label for="porcentagem_elemento">Porcentagem do Elemento:</label>
+            <input type="text" id="porcentagem_elemento" placeholder="Digite a porcentagem do elemento">
+            <button type="button" onclick="adicionarElemento()">Adicionar Elemento</button>
+            <h2>Lista de Elementos:</h2>
+            <ul id="lista_elementos">
+            </ul>
+        </div>
+        
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <script>
+        function adicionarElemento() {
+            var porcentagemInput = document.getElementById('porcentagem_elemento');
+            var elementoInput = document.getElementById('elemento');
+            var listaElementos = document.getElementById('lista_elementos');
+            var novoItem = document.createElement('li');
+            novoItem.textContent = elementoInput.value + ' - ' + porcentagemInput.value;
+
+            listaElementos.appendChild(novoItem);
+            elementoInput.value = '';
+            porcentagemInput.value = '';
+        }
+    </script>
+</body>
+</html>
